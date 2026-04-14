@@ -1,7 +1,7 @@
 extern crate handlebars;
 
 use crate::data::{StructsInfo, VisualizationData, Visualizable, ExternalEvent, State, ResourceAccessPoint, Event, LINE_SPACE};
-use crate::svg_frontend::line_styles::{RefDataLine, RefValueLine, OwnerLine};
+use crate::svg_frontend::line_styles::OwnerLine;
 use handlebars::Handlebars;
 use std::collections::BTreeMap;
 use serde::Serialize;
@@ -117,15 +117,6 @@ struct BoxData {
     w: i64,
     h: i64,
     title: String
-}
-
-/* struct_name: The name of the struct.
-   struct_members: A string representing the struct members.
-*/
-#[derive(Serialize)]
-struct StructTimelinePanelData {
-    struct_name: String,
-    struct_members: String
 }
 
 /* line_class: The class of the line (probably for CSS styling).
@@ -263,7 +254,7 @@ fn prepare_registry(registry: &mut Handlebars) {
     let hollow_ref_line_template =
         "        <path data-hash=\"{{hash}}\" class=\"staticref tooltip-trigger\" style=\"fill: transparent;\" stroke-width=\"2px\" stroke-dasharray=\"3\" d=\"M {{x1}} {{y1}} l {{dx}} {{dy}} v {{v}} l -{{dx}} {{dy}}\" data-tooltip-text=\"{{title}}\"/>\n";
     let box_template =
-        "        <rect id=\"{{name}}\" x=\"{{x}}\" y=\"{{y}}\" rx=\"20\" ry=\"20\" width=\"{{w}}\" height=\"{{h}}\" style=\"fill:white;stroke:black;stroke-width:3;opacity:0.1\" pointer-events=\"none\" />\n";
+        "        <rect id=\"{{name}}\" x=\"{{x}}\" y=\"{{y}}\" rx=\"20\" ry=\"20\" width=\"{{w}}\" height=\"{{h}}\" style=\"fill:var(--struct-box-fill);stroke:var(--struct-box-stroke);stroke-width:3;opacity:0.15\" pointer-events=\"none\" />\n";
 
     assert!(
         registry.register_template_string("struct_template", struct_template).is_ok()

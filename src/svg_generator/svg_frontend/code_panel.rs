@@ -3,12 +3,9 @@ extern crate handlebars;
 use crate::data::{ExternalEvent, LINE_SPACE};
 use handlebars::Handlebars;
 use std::{cmp::max, collections::BTreeMap};
-use std::fs::File;
-use std::io;
-
 pub fn render_code_panel(
-    annotated_lines: io::Lines<io::BufReader<File>>,
-    lines: io::Lines<io::BufReader<File>>,
+    annotated_source: &str,
+    source_plain: &str,
     max_x_space: &mut i64,
     event_line_map: &BTreeMap<usize, Vec<ExternalEvent>>,
 ) -> (String, i32) {
@@ -24,10 +21,8 @@ pub fn render_code_panel(
         .is_ok());
     
     /* figure out that max length */
-    for line in lines {
-        if let Ok(line_string) = line {
-            *max_x_space = max(line_string.len() as i64, *max_x_space);
-        }
+    for line in source_plain.lines() {
+        *max_x_space = max(line.len() as i64, *max_x_space);
     }
     
     /* Render the code segment of the svg to a String */
@@ -35,8 +30,9 @@ pub fn render_code_panel(
     let mut y = 90;
     let mut output = String::from("    <g id=\"code\">\n");
     let mut line_of_code = 1;
-    for line in annotated_lines {
-        if let Ok(line_string) = line {
+    for line in annotated_source.lines() {
+        {
+            let line_string = line;
             let mut data = BTreeMap::new();
             data.insert("X_VAL".to_string(), x.to_string());
             data.insert("Y_VAL".to_string(), y.to_string());

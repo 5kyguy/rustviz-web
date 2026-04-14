@@ -20,7 +20,7 @@
         <!-- used when pass to function by ref -->
         <g id="functionDot">
              <circle cx="0" cy="0" r="5" fill="transparent"/>
-             <text class="functionIcon" dx="-3.5" dy="0" fill="#6e6b5e">f</text>
+             <text class="functionIcon" dx="-3.5" dy="0">f</text>
         </g>
         <marker id="arrowHead" viewBox="0 0 10 10"
             refX="0" refY="4"

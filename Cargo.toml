@@ -15,5 +15,10 @@ repository = "https://github.com/rustviz/rustviz"
 exclude = ["src/svg_generator/README.md", "src/svg_generator/example.png"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+members = [".", "wasm"]
+exclude = ["RustvizParse"]
+resolver = "2"
+
 [dependencies]
 rustviz-svg = { path = "src/svg_generator/" }

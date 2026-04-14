@@ -1,4 +1,6 @@
 book
 src/assets
 src/SUMMARY.md
-theme
+theme/*
+!theme/playground.css
+!theme/playground.js
