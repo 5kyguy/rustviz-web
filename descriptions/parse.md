@@ -1,4 +1,4 @@
-## RustvizParse -- src -- parser.rs
+## parse -- src -- parser.rs
 
 **Parse.rs** parse through the AST tree provided by syn library and in turn make the header for future steps(information about Owners and functions). The purpose of parse.rs seems to be to fill the preprocess_external_events member of the visualization data struct (what is needed for svg rendering)
 
@@ -38,7 +38,7 @@
 - This function takes a **`Stmt`** (statement) and parses it to extract variable information and updates **`var_def`**.
 - It handles different statement types (**`Stmt::Local`**, **`Stmt::Semi`**, **`Stmt::Expr`**, etc.) and calls **`parse_expr`** to handle the expressions within the statement.
 
-## RustvizParse -- src -- main.rs
+## parse -- src -- main.rs
 
 - It uses the clap crate to define and handle command-line arguments. In this case, it defines a single command-line argument "target" which specifies the target file to parse.
 - The script first gets the target filename from the command line arguments, then uses the parse function to parse the file, then reads the original contents of the file. It then creates a new file named **"main.rs"** in the same directory as the original file and writes the parse results and original contents to this new file.

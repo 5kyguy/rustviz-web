@@ -2,7 +2,7 @@
 red=$'\e[1;31m'
 end=$'\e[0m'
 
-cd rustviz_mdbook
+cd mdbook
 
 # copy book.js to theme/
 mkdir -p "./theme"
@@ -95,7 +95,7 @@ for target in ${targetExamples[@]}; do
         if ! [[ -f "$EX/$target/main.rs" ]]
         then
             printf "\ngenerating header for %s..." $target
-            cd ../RustvizParse
+            cd ../parse
             cargo run "$EX/$target/source.rs" >/dev/null 2>&1
         fi
 
@@ -106,10 +106,10 @@ for target in ${targetExamples[@]}; do
         # If if the svg generation exited with an error or the required SVGs weren't created, report failure and continue
         if [[ $? -ne 0 || !(-f "examples/$target/vis_code.svg") || !(-f "examples/$target/vis_timeline.svg") ]]; then
             printf "${red}FAILED${end} on SVG generation.\n"
-            cd ../rustviz_mdbook
+            cd ../mdbook
             continue
         fi
-        cd ../rustviz_mdbook
+        cd ../mdbook
         
         # Copy files to mdbook directory
         mkdir -p "./src/assets/$target"
@@ -141,8 +141,8 @@ cp playground.md src/playground.md
 
 # Copy wasm-pack output into mdBook assets so it is published with the book
 if ! ls theme/pkg/*.js theme/pkg/*.wasm >/dev/null 2>&1; then
-    printf "${red}FAILED${end}: missing wasm assets in rustviz_mdbook/theme/pkg.\n"
-    printf "Run ./wasm/build.sh from repository root before ./rustviz_mdbook/view_examples.sh.\n"
+    printf "${red}FAILED${end}: missing wasm assets in mdbook/theme/pkg.\n"
+    printf "Run ./wasm/build.sh from repository root before ./mdbook/view_examples.sh.\n"
     exit 1
 fi
 mkdir -p src/assets/pkg

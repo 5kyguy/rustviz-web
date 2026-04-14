@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Haochen Zhang <haochenz@umich.edu>", "Yu Pan <panyu@umich.edu>", "Cyrus Omar <comar@umich.edu>"]
 edition = "2018"
 description = "a tool that use syn crate to parse rust code"
-repository = "https://github.com/rustviz/RustvizParse"
+repository = "https://github.com/rustviz/parse"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -20,3 +20,6 @@ log = "0.4.14"
 env_logger = "0.8.4"
 clap = "2.33.3"
 proc-macro2="1.0"
+
+# Standalone workspace so `cargo` works here while the repo root is a different workspace.
+[workspace]

@@ -1,0 +1,63 @@
+.rv-playground {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.rv-playground-col-full {
+  width: 100%;
+}
+
+.rv-playground-col label {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.rv-playground-ta {
+  width: 100%;
+  min-height: 16rem;
+  border-radius: 8px;
+  border: 1px solid var(--searchbar-border-color, #5c5c68);
+  padding: 0.75rem;
+  box-sizing: border-box;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--fg, #d9d9db);
+  background: var(--bg, #141617);
+}
+
+.rv-playground-output {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.rv-playground-out {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.rv-playground-svg {
+  min-height: 10rem;
+  overflow: auto;
+  border-radius: 8px;
+  border: 1px solid var(--searchbar-border-color, #5c5c68);
+  padding: 0.4rem;
+  background: var(--sidebar-bg, #1d2021);
+}
+
+.chapter .rv-playground-svg svg {
+  display: block;
+}
+
+.rv-playground-error {
+  border-radius: 8px;
+  border: 1px solid #f06b6b;
+  padding: 0.5rem 0.75rem;
+  color: #ffd2d2;
+  background: #532727;
+  white-space: pre-wrap;
+}
