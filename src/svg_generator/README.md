@@ -119,8 +119,6 @@ string_from_move_print
 └── vis_timeline.svg
 ```
 
-Congratulations! You have Successfully generated the visulizations! Add the name of your example folder to */test_example/test_examples.sh* and see them in your browser.
-
 ## Data Structures and Function Specifications
 
 * [Resource Access Point](#ResourceAccessPoint)

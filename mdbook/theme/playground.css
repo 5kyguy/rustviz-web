@@ -13,6 +13,50 @@
   margin-bottom: 0.35rem;
 }
 
+.rv-playground-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.rv-playground-header label {
+  margin-bottom: 0;
+}
+
+.rv-playground-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rv-playground-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  border: 1px solid var(--searchbar-border-color, #5c5c68);
+  border-radius: 6px;
+  background: var(--bg, #141617);
+  color: var(--fg, #d9d9db);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.rv-playground-btn:hover {
+  background: var(--sidebar-bg, #1d2021);
+  border-color: var(--icons, #737373);
+}
+
+.rv-playground-btn:active {
+  background: var(--searchbar-border-color, #5c5c68);
+}
+
+.rv-playground-btn i {
+  font-size: 0.9rem;
+}
+
 .rv-playground-ta {
   width: 100%;
   min-height: 16rem;
@@ -29,24 +73,45 @@
 }
 
 .rv-playground-output {
-  display: grid;
+  display: flex;
+  flex-direction: row;
   gap: 0.9rem;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  flex-wrap: nowrap;
 }
 
 .rv-playground-out {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  flex: 1 1 50%;
+  min-width: 0;
 }
 
 .rv-playground-svg {
   min-height: 10rem;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   border-radius: 8px;
   border: 1px solid var(--searchbar-border-color, #5c5c68);
   padding: 0.4rem;
   background: var(--sidebar-bg, #1d2021);
+}
+
+.rv-playground-svg svg {
+  max-width: none;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+/* Code panel should fit its content */
+.rv-playground-svg-code svg {
+  min-width: fit-content;
+}
+
+/* Timeline panel should take available space */
+.rv-playground-svg-timeline {
+  flex: 1 1 auto;
 }
 
 .chapter .rv-playground-svg svg {
@@ -60,4 +125,17 @@
   color: #ffd2d2;
   background: #532727;
   white-space: pre-wrap;
+}
+
+/* Hide the "Print this book" button */
+#print-button,
+a[title="Print this book"],
+a[aria-label="Print this book"] {
+  display: none !important;
+}
+
+/* Hide Rust and Ayu themes from the theme selector */
+button#rust,
+button#ayu {
+  display: none !important;
 }

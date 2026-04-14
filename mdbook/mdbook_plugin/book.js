@@ -459,6 +459,12 @@ function adjust_visualization_size(flexbox) {
     try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
     if (theme === null || theme === undefined) { theme = default_theme; }
 
+    // Fallback: if stored theme is Rust or Ayu (removed themes), use default
+    if (theme === 'rust' || theme === 'ayu') {
+        theme = default_theme;
+        try { localStorage.setItem('mdbook-theme', theme); } catch(e) { }
+    }
+
     set_theme(theme, false);
 
     themeToggleButton.addEventListener('click', function () {
@@ -633,6 +639,14 @@ function adjust_visualization_size(flexbox) {
     document.addEventListener('keydown', function (e) {
         if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
         if (window.search && window.search.hasFocus()) { return; }
+        // Don't navigate if an input, textarea, or contenteditable element is focused
+        var activeElement = document.activeElement;
+        if (activeElement) {
+            var tagName = activeElement.tagName.toLowerCase();
+            if (tagName === 'input' || tagName === 'textarea' || activeElement.contentEditable === 'true') {
+                return;
+            }
+        }
 
         switch (e.key) {
             case 'ArrowRight':

@@ -7,32 +7,15 @@
     <defs>
         <style type="text/css">
         <![CDATA[
-        /* general setup */
-:root {
-    --bg-color: #f1f1f1;
-    --text-color: #6e6b5e;
-    --icon-cutout-color: #f1f1f1;
-    --struct-box-fill: #ffffff;
-    --struct-box-stroke: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #1c1e24;
-        --text-color: #d5d7de;
-        --icon-cutout-color: #1c1e24;
-        --struct-box-fill: #2a2d36;
-        --struct-box-stroke: #7f8697;
-    }
-}
-
+        /* general setup - uses mdBook theme CSS variables */
 svg {
-    background-color: var(--bg-color);
+    background-color: var(--sidebar-bg, #f1f1f1);
 }
 
 text {
     vertical-align: baseline;
     text-anchor: start;
+    fill: var(--fg, #6e6b5e);
 }
 
 #heading {
@@ -48,7 +31,7 @@ text {
 
 /* code related styling */
 text.code {
-    fill: var(--text-color);
+    fill: var(--fg, #6e6b5e);
     white-space: pre;
     font-family: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace !important;
     font-size: 0.875em;
@@ -81,7 +64,7 @@ text.label {
 .functionIcon {
     paint-order: stroke;
     stroke-width: 3px;
-    fill: var(--icon-cutout-color);
+    fill: var(--sidebar-bg, #f1f1f1);
     font-size: 20px;
     font-family: times;
     font-weight: lighter;
@@ -95,7 +78,7 @@ text.label {
     font-style: italic;
     paint-order: stroke;
     stroke-width: 3px;
-    fill: var(--icon-cutout-color) !important;
+    fill: var(--sidebar-bg, #f1f1f1) !important;
 }
 
 /* flex related styling */

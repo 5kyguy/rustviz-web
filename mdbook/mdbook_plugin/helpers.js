@@ -15,6 +15,45 @@ const SVG = {
     'rect': 'structBox'
 };
 
+/* --------------------- THEME APPLICATION --------------------- */
+
+// Apply current theme colors to all embedded SVGs
+function applyThemeToAllSvgs() {
+    const html = document.documentElement;
+    const computedStyle = getComputedStyle(html);
+    const bg = computedStyle.getPropertyValue('--sidebar-bg').trim() || '#f1f1f1';
+    const fg = computedStyle.getPropertyValue('--sidebar-fg').trim() || '#6e6b5e';
+
+    // Find all embedded SVG objects
+    const svgObjects = document.querySelectorAll('object[type="image/svg+xml"]');
+    svgObjects.forEach(function(obj) {
+        try {
+            if (obj.contentDocument && obj.contentDocument.firstChild) {
+                const svg = obj.contentDocument.firstChild;
+                // Set CSS variables on the SVG element
+                svg.style.setProperty('--sidebar-bg', bg);
+                svg.style.setProperty('--sidebar-fg', fg);
+                // Apply background directly
+                svg.style.backgroundColor = bg;
+            }
+        } catch (e) {
+            // Cross-origin or not loaded yet - ignore
+        }
+    });
+}
+
+// Apply theme when SVGs are loaded
+function setupSvgThemeLoading() {
+    const svgObjects = document.querySelectorAll('object[type="image/svg+xml"]');
+    svgObjects.forEach(function(obj) {
+        obj.addEventListener('load', function() {
+            applyThemeToAllSvgs();
+        });
+    });
+    // Also apply immediately for already-loaded SVGs
+    applyThemeToAllSvgs();
+}
+
 /* --------------------- SIMPLE DRIVER --------------------- */
 function helpers(classname) {
     // create tooltip element before #page-wrapper
@@ -347,3 +386,24 @@ function toggleStruct(turn_on) {
         });
     }
 };*/
+
+/* --------------------- THEME CHANGE OBSERVER --------------------- */
+
+// Initialize SVG theme loading when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupSvgThemeLoading);
+} else {
+    setupSvgThemeLoading();
+}
+
+// Observe theme changes by watching for class changes on html element
+(function observeThemeChanges() {
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                applyThemeToAllSvgs();
+            }
+        });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+})();

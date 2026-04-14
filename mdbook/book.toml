@@ -2,7 +2,7 @@
 authors = ["Vishnu Reddy"]
 language = "en"
 src = "src"
-title = "test_examples"
+title = "RustViz"
 
 [output.html]
 additional-css = ["mdbook_plugin/visualization.css", "theme/playground.css"]

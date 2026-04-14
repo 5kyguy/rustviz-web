@@ -6,7 +6,7 @@ cd "$ROOT"
 
 usage() {
   cat <<'EOF'
-Usage: ./rustwiz.sh <command>
+Usage: ./rustviz.sh <command>
 
 Commands:
   clean   Remove generated build outputs for a fresh rebuild
