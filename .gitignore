@@ -1,3 +1,17 @@
-﻿target
+﻿# Rust
+target
+parse/target
 Cargo.lock
+
+# IDE
 .vscode
+.cursor
+
+mdbook/book
+mdbook/src/assets
+mdbook/theme/*
+!mdbook/theme/playground.css
+!mdbook/theme/playground.js
+!mdbook/theme/pkg/
+!mdbook/theme/pkg/wasm.js
+!mdbook/theme/pkg/wasm_bg.wasm
