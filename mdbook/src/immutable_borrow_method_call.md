@@ -1,3 +1,15 @@
+## Theory
+
+Methods commonly take `&self`, which means calling the method immutably borrows the receiver instead of moving it.
+
+This allows read-only behavior on a value while keeping ownership with the caller.
+
+> **Official Rust Book**: [Method Syntax](https://doc.rust-lang.org/book/ch05-03-method-syntax.html#method-syntax)
+
+---
+
+## Code Example
+
 ```rust
 {{#rustdoc_include assets/immutable_borrow_method_call/source.rs}}
 ```

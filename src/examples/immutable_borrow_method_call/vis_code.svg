@@ -14,7 +14,7 @@ svg {
 text {
     vertical-align: baseline;
     text-anchor: start;
-    fill: var(--fg, #6e6b5e);
+    fill: var(--sidebar-fg, #6e6b5e);
 }
 
 #heading {
@@ -30,7 +30,7 @@ text {
 
 /* code related styling */
 text.code {
-    fill: var(--fg, #6e6b5e);
+    fill: var(--sidebar-fg, #6e6b5e);
     white-space: pre;
     font-family: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace !important;
     font-size: 0.875em;

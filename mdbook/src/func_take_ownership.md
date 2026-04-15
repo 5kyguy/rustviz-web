@@ -1,3 +1,15 @@
+## Theory
+
+Passing a value into a function transfers ownership when the parameter takes the value by type (for example, `String` rather than `&String`).
+
+After that call, the original binding is no longer valid unless ownership is returned in some form.
+
+> **Official Rust Book**: [Ownership and Functions](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#ownership-and-functions)
+
+---
+
+## Code Example
+
 ```rust
 {{#rustdoc_include assets/func_take_ownership/source.rs}}
 ```

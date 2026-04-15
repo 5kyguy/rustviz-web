@@ -1,3 +1,15 @@
+## Theory
+
+`String` owns heap data, so assigning or passing it by value moves ownership unless you explicitly borrow or clone.
+
+Understanding this move behavior explains why some bindings become invalid after transfer and why Rust prevents later use.
+
+> **Official Rust Book**: [Variables and Data Interacting with Move](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#variables-and-data-interacting-with-move)
+
+---
+
+## Code Example
+
 ```rust
 {{#rustdoc_include assets/string_from_move_print/source.rs}}
 ```

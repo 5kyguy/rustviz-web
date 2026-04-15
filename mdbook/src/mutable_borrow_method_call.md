@@ -1,3 +1,15 @@
+## Theory
+
+Methods that take `&mut self` borrow the receiver mutably, allowing the method to change internal state without taking ownership.
+
+Rust's method-call syntax automatically handles the needed referencing while preserving borrowing rules.
+
+> **Official Rust Book**: [Method Syntax](https://doc.rust-lang.org/book/ch05-03-method-syntax.html#method-syntax)
+
+---
+
+## Code Example
+
 ```rust
 {{#rustdoc_include assets/mutable_borrow_method_call/source.rs}}
 ```

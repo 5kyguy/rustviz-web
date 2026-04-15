@@ -1,3 +1,15 @@
+## Theory
+
+A reference (`&T`) lets you borrow a value without taking ownership. Borrowing allows functions to read data while the original owner keeps control.
+
+Because ownership does not move, the borrowed value remains usable after the call.
+
+> **Official Rust Book**: [References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+
+---
+
+## Code Example
+
 ```rust
 {{#rustdoc_include assets/immutable_borrow/source.rs}}
 ```

@@ -1,3 +1,15 @@
+## Theory
+
+For heap-owning values like `String`, assignment moves ownership instead of copying heap data. After `let s2 = s1;`, `s1` is no longer valid.
+
+This prevents double-free bugs by ensuring only one owner is responsible for dropping the value.
+
+> **Official Rust Book**: [Variables and Data Interacting with Move](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#variables-and-data-interacting-with-move)
+
+---
+
+## Code Example
+
 ```rust
 {{#rustdoc_include assets/move_assignment/source.rs}}
 ```

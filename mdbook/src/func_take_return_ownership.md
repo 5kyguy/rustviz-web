@@ -1,3 +1,15 @@
+## Theory
+
+Functions can take ownership of values and then return ownership back to the caller. This follows the same ownership transfer rules as assignment and returns.
+
+While valid, this pattern is often verbose and motivates borrowing when you only need temporary access.
+
+> **Official Rust Book**: [Ownership and Functions](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#ownership-and-functions) and [Return Values and Scope](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#return-values-and-scope)
+
+---
+
+## Code Example
+
 ```rust
 {{#rustdoc_include assets/func_take_return_ownership/source.rs}}
 ```

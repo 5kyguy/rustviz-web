@@ -31,3 +31,5 @@ Inference is best-effort. Unsupported constructs will show an inline error inste
     </div>
   </div>
 </div>
+
+<!-- Note: This file is a duplicate of src/playground.md for reference. The actual source file used by mdbook is in the src/ directory. -->

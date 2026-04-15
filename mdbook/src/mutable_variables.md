@@ -1,3 +1,15 @@
+## Theory
+
+When you need to update a value, Rust requires an explicit mutable binding with `let mut`. This makes mutation intentional and visible to readers of the code.
+
+Rust keeps immutability as the default, while `mut` is the opt-in mechanism for state changes.
+
+> **Official Rust Book**: [Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)
+
+---
+
+## Code Example
+
 ```rust
 {{#rustdoc_include assets/mutable_variables/source.rs}}
 ```
