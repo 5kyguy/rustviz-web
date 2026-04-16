@@ -1,6 +1,15 @@
 /* @ts-self-types="./wasm.d.ts" */
 
 /**
+ * Source line spacing used in SVG timelines (px). Playground sets editor `line-height` to match.
+ * @returns {number}
+ */
+export function line_step_px() {
+    const ret = wasm.line_step_px();
+    return ret;
+}
+
+/**
  * Same pipeline as [`render_rustviz_source_wasm`] but returns `{ vis_combined }` (single SVG).
  * @param {string} source_rs
  * @returns {any}

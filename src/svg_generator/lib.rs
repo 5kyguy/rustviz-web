@@ -1,5 +1,11 @@
 pub mod data;
 pub mod error;
+
+/// Vertical spacing between logical source lines in SVG output (pixels). Same as [`data::LINE_SPACE`].
+#[inline]
+pub fn line_step_px() -> i32 {
+    data::LINE_SPACE as i32
+}
 pub mod hover_messages;
 pub mod infer;
 pub mod parse;

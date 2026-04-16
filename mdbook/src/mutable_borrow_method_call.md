@@ -1,4 +1,6 @@
-## Theory
+# Method Calls: Mutable Borrow
+
+## Overview
 
 Methods that take `&mut self` borrow the receiver mutably, allowing the method to change internal state without taking ownership.
 
@@ -8,13 +10,8 @@ Rust's method-call syntax automatically handles the needed referencing while pre
 
 ---
 
-## Code Example
+## Code example
 
-```rust
-{{#rustdoc_include assets/mutable_borrow_method_call/source.rs}}
-```
-
-<div class="flex-container vis_block" style="position:relative; margin-left:-75px; margin-right:-75px; display: flex;">
-<object type="image/svg+xml" class="mutable_borrow_method_call code_panel" data="assets/mutable_borrow_method_call/vis_code.svg"></object>
-<object type="image/svg+xml" class="mutable_borrow_method_call tl_panel" data="assets/mutable_borrow_method_call/vis_timeline.svg" style="width: auto;" onmouseenter="helpers('mutable_borrow_method_call')"></object>
+<div class="flex-container vis_block rv-vis-block">
+<object type="image/svg+xml" class="mutable_borrow_method_call rv-viz-combined" data="assets/mutable_borrow_method_call/vis_combined.svg" onmouseenter="helpers('mutable_borrow_method_call')"></object>
 </div>

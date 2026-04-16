@@ -1,4 +1,6 @@
-## Theory
+# Ownership: Function Parameters
+
+## Overview
 
 Passing a value into a function transfers ownership when the parameter takes the value by type (for example, `String` rather than `&String`).
 
@@ -8,13 +10,8 @@ After that call, the original binding is no longer valid unless ownership is ret
 
 ---
 
-## Code Example
+## Code example
 
-```rust
-{{#rustdoc_include assets/func_take_ownership/source.rs}}
-```
-
-<div class="flex-container vis_block" style="position:relative; margin-left:-75px; margin-right:-75px; display: flex;">
-<object type="image/svg+xml" class="func_take_ownership code_panel" data="assets/func_take_ownership/vis_code.svg"></object>
-<object type="image/svg+xml" class="func_take_ownership tl_panel" data="assets/func_take_ownership/vis_timeline.svg" style="width: auto;" onmouseenter="helpers('func_take_ownership')"></object>
+<div class="flex-container vis_block rv-vis-block">
+<object type="image/svg+xml" class="func_take_ownership rv-viz-combined" data="assets/func_take_ownership/vis_combined.svg" onmouseenter="helpers('func_take_ownership')"></object>
 </div>

@@ -1,6 +1,12 @@
 use js_sys::{Object, Reflect};
 use wasm_bindgen::prelude::*;
 
+/// Source line spacing used in SVG timelines (px). Playground sets editor `line-height` to match.
+#[wasm_bindgen]
+pub fn line_step_px() -> i32 {
+    rustviz_lib::line_step_px()
+}
+
 /// Run the full RustViz pipeline in the browser. Returns a JS object `{ vis_code, vis_timeline }` (SVG strings).
 #[wasm_bindgen]
 pub fn render_rustviz_wasm(

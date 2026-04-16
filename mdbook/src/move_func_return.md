@@ -1,4 +1,6 @@
-## Theory
+# Move Semantics: Function Return
+
+## Overview
 
 Returning a value transfers ownership to the caller. Function boundaries follow the same move rules as assignment.
 
@@ -8,13 +10,8 @@ This means ownership can flow out of one scope and into another through return v
 
 ---
 
-## Code Example
+## Code example
 
-```rust
-{{#rustdoc_include assets/move_func_return/source.rs}}
-```
-
-<div class="flex-container vis_block" style="position:relative; margin-left:-75px; margin-right:-75px; display: flex;">
-<object type="image/svg+xml" class="move_func_return code_panel" data="assets/move_func_return/vis_code.svg"></object>
-<object type="image/svg+xml" class="move_func_return tl_panel" data="assets/move_func_return/vis_timeline.svg" style="width: auto;" onmouseenter="helpers('move_func_return')"></object>
+<div class="flex-container vis_block rv-vis-block">
+<object type="image/svg+xml" class="move_func_return rv-viz-combined" data="assets/move_func_return/vis_combined.svg" onmouseenter="helpers('move_func_return')"></object>
 </div>

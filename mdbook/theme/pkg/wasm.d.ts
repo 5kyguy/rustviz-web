@@ -2,6 +2,11 @@
 /* eslint-disable */
 
 /**
+ * Source line spacing used in SVG timelines (px). Playground sets editor `line-height` to match.
+ */
+export function line_step_px(): number;
+
+/**
  * Same pipeline as [`render_rustviz_source_wasm`] but returns `{ vis_combined }` (single SVG).
  */
 export function render_rustviz_source_combined_wasm(source_rs: string): any;
@@ -21,6 +26,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
+    readonly line_step_px: () => number;
     readonly render_rustviz_source_combined_wasm: (a: number, b: number) => [number, number, number];
     readonly render_rustviz_source_wasm: (a: number, b: number) => [number, number, number];
     readonly render_rustviz_wasm: (a: number, b: number, c: number, d: number, e: number, f: number) => [number, number, number];

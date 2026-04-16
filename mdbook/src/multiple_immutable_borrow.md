@@ -1,4 +1,6 @@
-## Theory
+# Multiple Immutable Borrows
+
+## Overview
 
 Rust allows multiple immutable references to the same value at the same time, because read-only access does not create conflicting mutations.
 
@@ -8,13 +10,8 @@ This enables safe shared access while still enforcing strict rules around mutati
 
 ---
 
-## Code Example
+## Code example
 
-```rust
-{{#rustdoc_include assets/multiple_immutable_borrow/source.rs}}
-```
-
-<div class="flex-container vis_block" style="position:relative; margin-left:-75px; margin-right:-75px; display: flex;">
-<object type="image/svg+xml" class="multiple_immutable_borrow code_panel" data="assets/multiple_immutable_borrow/vis_code.svg"></object>
-<object type="image/svg+xml" class="multiple_immutable_borrow tl_panel" data="assets/multiple_immutable_borrow/vis_timeline.svg" style="width: auto;" onmouseenter="helpers('multiple_immutable_borrow')"></object>
+<div class="flex-container vis_block rv-vis-block">
+<object type="image/svg+xml" class="multiple_immutable_borrow rv-viz-combined" data="assets/multiple_immutable_borrow/vis_combined.svg" onmouseenter="helpers('multiple_immutable_borrow')"></object>
 </div>

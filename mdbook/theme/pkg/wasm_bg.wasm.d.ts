@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export const memory: WebAssembly.Memory;
+export const line_step_px: () => number;
 export const render_rustviz_source_combined_wasm: (a: number, b: number) => [number, number, number];
 export const render_rustviz_source_wasm: (a: number, b: number) => [number, number, number];
 export const render_rustviz_wasm: (a: number, b: number, c: number, d: number, e: number, f: number) => [number, number, number];

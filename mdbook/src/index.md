@@ -12,7 +12,7 @@ Welcome! This interactive tool visualizes Rust's ownership, borrowing, and copyi
 ## How to Use These Examples
 
 1. **Select a topic** from the left sidebar (organized from basics to advanced)
-2. **Read the Rust source code** at the top of each page
+2. **Read the Rust source** in the diagram on each page (the same code appears inside the visualization)
 3. **Hover over the timeline** to understand:
    - **Dots** – Events (variable declarations, moves, borrows)
    - **Vertical lines** – Variable lifetimes
@@ -20,15 +20,16 @@ Welcome! This interactive tool visualizes Rust's ownership, borrowing, and copyi
 
 ## Try the Playground
 
-Use the **Playground** (last item in sidebar) to write your own Rust code and see the visualization instantly. Experiment with different patterns to build intuition!
+Use the **Playground** (last item in the sidebar) to write Rust beside a live **ownership & timeline** diagram. Experiment with different patterns to build intuition!
 
 ## Learning Path
 
 Start from the top of the sidebar and work your way down:
-- Begin with `immutable_variable` and `mutable_variables`
-- Then explore `copy` to understand what makes types copyable
-- Move on to ownership examples (`move_*`, `func_take_*`)
-- Finally, study borrowing with `immutable_borrow` and `mutable_borrow`
+
+- Begin with **Immutable Variables** and **Mutable Variables**
+- Then explore **Stack-Only Data: Copy** to understand what makes types copyable
+- Move on to **Ownership** examples (moves and functions)
+- Finally, study **References and Borrowing**
 
 ---
 

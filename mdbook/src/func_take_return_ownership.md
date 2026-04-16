@@ -1,4 +1,6 @@
-## Theory
+# Ownership: Take and Return
+
+## Overview
 
 Functions can take ownership of values and then return ownership back to the caller. This follows the same ownership transfer rules as assignment and returns.
 
@@ -8,13 +10,8 @@ While valid, this pattern is often verbose and motivates borrowing when you only
 
 ---
 
-## Code Example
+## Code example
 
-```rust
-{{#rustdoc_include assets/func_take_return_ownership/source.rs}}
-```
-
-<div class="flex-container vis_block" style="position:relative; margin-left:-75px; margin-right:-75px; display: flex;">
-<object type="image/svg+xml" class="func_take_return_ownership code_panel" data="assets/func_take_return_ownership/vis_code.svg"></object>
-<object type="image/svg+xml" class="func_take_return_ownership tl_panel" data="assets/func_take_return_ownership/vis_timeline.svg" style="width: auto;" onmouseenter="helpers('func_take_return_ownership')"></object>
+<div class="flex-container vis_block rv-vis-block">
+<object type="image/svg+xml" class="func_take_return_ownership rv-viz-combined" data="assets/func_take_return_ownership/vis_combined.svg" onmouseenter="helpers('func_take_return_ownership')"></object>
 </div>

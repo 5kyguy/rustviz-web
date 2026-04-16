@@ -1,18 +1,33 @@
 # Summary
 
 - [Home](./index.md)
-- [immutable_variable](./immutable_variable.md)
-- [mutable_variables](./mutable_variables.md)
-- [copy](./copy.md)
-- [move_assignment](./move_assignment.md)
-- [move_different_scope](./move_different_scope.md)
-- [move_func_return](./move_func_return.md)
-- [func_take_ownership](./func_take_ownership.md)
-- [func_take_return_ownership](./func_take_return_ownership.md)
-- [string_from_move_print](./string_from_move_print.md)
-- [immutable_borrow](./immutable_borrow.md)
-- [mutable_borrow](./mutable_borrow.md)
-- [multiple_immutable_borrow](./multiple_immutable_borrow.md)
-- [immutable_borrow_method_call](./immutable_borrow_method_call.md)
-- [mutable_borrow_method_call](./mutable_borrow_method_call.md)
+
+# Variables and mutability
+
+- [Immutable Variables](./immutable_variable.md)
+- [Mutable Variables](./mutable_variables.md)
+
+# The Copy trait
+
+- [Stack-Only Data: Copy](./copy.md)
+
+# Ownership
+
+- [Move: Assignment](./move_assignment.md)
+- [Move: Different Scope](./move_different_scope.md)
+- [Move: Function Return](./move_func_return.md)
+- [Ownership: Function Parameters](./func_take_ownership.md)
+- [Ownership: Take and Return](./func_take_return_ownership.md)
+- [String and Move](./string_from_move_print.md)
+
+# References and borrowing
+
+- [Immutable Borrow](./immutable_borrow.md)
+- [Mutable Borrow](./mutable_borrow.md)
+- [Multiple Immutable Borrows](./multiple_immutable_borrow.md)
+- [Method Calls: Immutable Borrow](./immutable_borrow_method_call.md)
+- [Method Calls: Mutable Borrow](./mutable_borrow_method_call.md)
+
+---
+
 - [Playground](./playground.md)
