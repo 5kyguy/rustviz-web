@@ -15,3 +15,9 @@ mdbook/theme/*
 !mdbook/theme/pkg/
 !mdbook/theme/pkg/wasm.js
 !mdbook/theme/pkg/wasm_bg.wasm
+
+book/
+
+# Node (Workers)
+.wrangler/
+workers/rustc-api/node_modules/

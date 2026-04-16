@@ -2,7 +2,7 @@
 
 Write Rust in the editor — the ownership and timeline on the right update shortly after you stop typing (or at most every second or so while you keep typing). **Compile** runs the code through the Rust compiler. Hover diagram dots, arrows, and labels for explanations. Line height matches the diagram so rows stay aligned when you scroll.
 
-<div id="rv-playground" class="rv-playground rv-playground-full" data-compile-endpoint="">
+<div id="rv-playground" class="rv-playground rv-playground-full" data-compile-endpoint="https://rustviz-compile-proxy.skyguy-574.workers.dev">
   <div class="rv-playground-shell">
     <section class="rv-playground-pane rv-pane-editor" aria-label="Source editor">
       <div class="rv-playground-toolbar">
