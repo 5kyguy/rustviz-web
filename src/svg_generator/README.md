@@ -95,7 +95,7 @@ We then add these events information to the VisualizationData instance we declar
     vd.append_external_event(ExternalEvent::GoOutOfScope{ ro: y }, &(5 as usize));
 ```
 
-Now the final step is to activte the rendering function that generate the vis_code.svg and vis_timeline.svg that are visulization SVG files for the code section and timeline section using the `svg_generation::render_svg()` function:
+Now the final step is to activate the rendering function that generates `vis_combined.svg` (code + timeline in one SVG) using the `svg_generation::render_svg()` function:
 
 ```rust
 svg_generation::render_svg(&"examples/string_from_move_print/input/".to_owned().to_owned(), &"examples/string_from_move_print/".to_owned(), & mut vd);
@@ -115,8 +115,7 @@ string_from_move_print
 │   └── annotated_source.rs
 ├── main.rs
 ├── source.rs
-├── vis_code.svg
-└── vis_timeline.svg
+└── vis_combined.svg
 ```
 
 ## Data Structures and Function Specifications
@@ -434,8 +433,7 @@ ExternalEvents is an enum that hold all the movements of a the resource, here is
         │   └── annotated_source.rs
         ├── main.rs
         ├── source.rs
-        ├── vis_code.svg
-        └── vis_timeline.svg
+        └── vis_combined.svg
     ```
 
     | File | Purpose |
@@ -443,8 +441,7 @@ ExternalEvents is an enum that hold all the movements of a the resource, here is
     | `annotated_source.rs` | Adds styling to code panel with the use of &lt;tspan&gt; tags<br>Properties of Variables: `data-hash`<br>Properties of Functions: `hash`, `data-hash="0"`, `class="fn"` |
     | `main.rs` | Defines all ResourceAccessPoint types and events |
     | `source.rs` | Contains original, source code that will be rendered into SVG |
-    | `vis_code.svg` | (1/2) Final rendered SVG code panel |
-    | `vis_timeline.svg` | (2/2) Final rendered SVG timeline panel with arrows, dots, etc |
+    | `vis_combined.svg` | Final rendered SVG: code panel and timeline in one document |
 
     b. [src](svg_generator/src)
 

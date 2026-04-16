@@ -26,7 +26,7 @@ clean_builds() {
 
   echo "== remove generated example SVGs =="
   shopt -s nullglob globstar
-  for f in src/examples/**/vis_code.svg src/examples/**/vis_timeline.svg; do
+  for f in src/examples/**/vis_combined.svg src/examples/**/vis_code.svg src/examples/**/vis_timeline.svg; do
     rm -f "$f"
     echo "removed $f"
   done

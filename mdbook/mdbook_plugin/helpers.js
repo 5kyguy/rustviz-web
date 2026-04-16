@@ -28,8 +28,8 @@ function applyThemeToAllSvgs() {
     const svgObjects = document.querySelectorAll('object[type="image/svg+xml"]');
     svgObjects.forEach(function(obj) {
         try {
-            if (obj.contentDocument && obj.contentDocument.firstChild) {
-                const svg = obj.contentDocument.firstChild;
+            const svg = obj.contentDocument && obj.contentDocument.documentElement;
+            if (svg && svg.tagName && svg.tagName.toLowerCase() === 'svg') {
                 // Set CSS variables on the SVG element
                 svg.style.setProperty('--sidebar-bg', bg);
                 svg.style.setProperty('--sidebar-fg', fg);
@@ -54,6 +54,11 @@ function setupSvgThemeLoading() {
     applyThemeToAllSvgs();
 }
 
+/* Combined book SVG: one <object class="… rv-viz-combined"> per example */
+function rvGetVizObject(classname) {
+    return document.querySelector('object[type="image/svg+xml"].' + classname);
+}
+
 /* --------------------- SIMPLE DRIVER --------------------- */
 function helpers(classname) {
     // create tooltip element before #page-wrapper
@@ -76,15 +81,15 @@ function helpers(classname) {
 
 // change function name color on hover
 function displayFn(classname) {
-    // get svg elements
-    let vis_num = document.getElementsByClassName(classname);
-    let code_obj = vis_num[0];
-    let tl_obj = vis_num[1];
-    let c_svg = code_obj.contentDocument.firstChild;
-    let tl_svg = tl_obj.contentDocument.firstChild
-    // get elements that will trigger function
-    let triggers = tl_svg.getElementsByClassName('fn-trigger');
-    var functions = c_svg.getElementsByClassName('fn');
+    let obj = rvGetVizObject(classname);
+    if (!obj || !obj.contentDocument) {
+        return;
+    }
+    let doc = obj.contentDocument;
+    let root = doc.documentElement;
+    let tlRoot = doc.getElementById('rv-combined-timeline') || root;
+    let triggers = tlRoot.getElementsByClassName('fn-trigger');
+    var functions = root.getElementsByClassName('fn');
     
     for (let i = 0; i < triggers.length; i++) {
         triggers[i].addEventListener('mouseover', showFn);
@@ -113,23 +118,28 @@ function displayFn(classname) {
 
 /* --------------------- SVG CODE-RELATED FUNCTIONS --------------------- */
 
-// resize code block to fit comments
+// resize code block to fit comments (legacy split SVGs only; combined sets width in Rust)
 function sizeToFit(object) {
+    if (!object || !object.contentDocument) {
+        return;
+    }
+    let svg_doc = object.contentDocument;
+    if (svg_doc.getElementById('rv-combined-timeline')) {
+        return;
+    }
     // Case for Chrome loading
     if (navigator.userAgent.indexOf("Chrome") !== -1) {
         object.addEventListener('load', function() {
-            let svg_doc = object.contentDocument;
             let code_width = svg_doc.getElementById('code').getBBox().width;
             let new_width = Math.max(code_width + 30, 400);
-            svg_doc.firstChild.setAttribute('width', new_width + 'px');
+            svg_doc.documentElement.setAttribute('width', new_width + 'px');
         }, {once: true});
     }
     else {
         if (object.contentDocument.readyState === "complete") {
-            let svg_doc = object.contentDocument;
             let code_width = svg_doc.getElementById('code').getBBox().width;
             let new_width = Math.max(code_width + 30, 400);
-            svg_doc.firstChild.setAttribute('width', new_width + 'px');
+            svg_doc.documentElement.setAttribute('width', new_width + 'px');
         }
     }
 }
@@ -138,10 +148,12 @@ function sizeToFit(object) {
 
 // change tooltip text on hover
 function displayTooltip(tooltip, classname) {
-    // get svg elements
-    let tl_obj = document.getElementsByClassName(classname)[1];
-    let tl_svg = tl_obj.contentDocument.firstChild
-    // get elements that will trigger function
+    let tl_obj = rvGetVizObject(classname);
+    if (!tl_obj || !tl_obj.contentDocument) {
+        return;
+    }
+    let doc = tl_obj.contentDocument;
+    let tl_svg = doc.getElementById('rv-combined-timeline') || doc.documentElement;
     let triggers = tl_svg.getElementsByClassName('tooltip-trigger');
 
     // track time
@@ -196,7 +208,11 @@ function displayTooltip(tooltip, classname) {
 
     /* ---- SHOW RELEVANT LINES ---- */
     function insertUnderline(e) {
-        let doc = document.getElementsByClassName(classname + ' code_panel')[0].contentDocument; //code_panel
+        let obj = rvGetVizObject(classname);
+        if (!obj || !obj.contentDocument) {
+            return;
+        }
+        let doc = obj.contentDocument;
         let begin = 0, end = 0;
         if (e.currentTarget.tagName === 'path') {
             let arr = e.currentTarget.getAttribute('d').split(' ');
@@ -262,7 +278,11 @@ function mousePos(evt, obj) {
 }
 
 function removeUnderline(e, classname) {
-    let doc = document.getElementsByClassName(classname + ' code_panel')[0].contentDocument; //code_panel
+    let obj = rvGetVizObject(classname);
+    if (!obj || !obj.contentDocument) {
+        return;
+    }
+    let doc = obj.contentDocument;
     let arr = doc.getElementsByClassName('emph');
     for (let i = arr.length-1; i >= 0; --i) {
         arr[i].remove();

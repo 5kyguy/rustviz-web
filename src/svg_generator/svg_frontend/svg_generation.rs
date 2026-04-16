@@ -18,8 +18,22 @@ struct SvgData {
     height: i32,
 }
 
+#[derive(Serialize)]
+struct CombinedSvgData {
+    visualization_name: String,
+    css: String,
+    code: String,
+    diagram: String,
+    tl_id: String,
+    tl_width: i32,
+    height: i32,
+    split_x: i32,
+    total_width: i32,
+}
+
 const CODE_TEMPLATE: &str = include_str!("../templates/code_template.svg");
 const TIMELINE_TEMPLATE: &str = include_str!("../templates/timeline_template.svg");
+const COMBINED_TEMPLATE: &str = include_str!("../templates/combined_template.svg");
 const BOOK_SVG_STYLE: &str = include_str!("../templates/book_svg_style.css");
 
 /// Render SVGs from annotated source, plain source for layout, and visualization state.
@@ -70,7 +84,55 @@ pub fn render_svg_strings(
     Ok((final_code_svg_content, final_timeline_svg_content))
 }
 
-/// Write SVGs to `output_dir` (must end with `/` or use Path — paths are `output_dir/vis_code.svg`).
+/// Single SVG with code panel and timeline side by side (for playground / compact embeds).
+pub fn render_combined_svg_string(
+    annotated_source: &str,
+    source_plain: &str,
+    viz_name: &str,
+    visualization_data: &mut VisualizationData,
+) -> Result<String, RustvizError> {
+    preprocess_viz_data(visualization_data);
+
+    let mut handlebars = Handlebars::new();
+    handlebars.register_escape_fn(handlebars::no_escape);
+    handlebars
+        .register_template_string("combined_svg_template", COMBINED_TEMPLATE)
+        .map_err(|e| RustvizError::Parse(format!("combined template: {}", e)))?;
+
+    let mut max_x_space: i64 = 0;
+    let (code_panel_string, num_lines) = code_panel::render_code_panel(
+        annotated_source,
+        source_plain,
+        &mut max_x_space,
+        &visualization_data.event_line_map,
+    );
+
+    let (timeline_panel_string, max_width) = timeline_panel::render_timeline_panel(visualization_data);
+
+    let tl_width = cmp::max(max_width, 200);
+    let height = (num_lines * LINE_SPACE as i32 + 80) + 50;
+    // Horizontal offset for timeline: approximate code panel width (matches browser sizing heuristics).
+    let split_x = cmp::max(max_x_space as i32 * 9 + 100, 400);
+    let total_width = split_x + 24 + tl_width;
+
+    let svg_data = CombinedSvgData {
+        visualization_name: viz_name.to_string(),
+        css: BOOK_SVG_STYLE.to_string(),
+        code: code_panel_string,
+        diagram: timeline_panel_string,
+        tl_id: "tl_".to_owned() + viz_name,
+        tl_width,
+        height,
+        split_x,
+        total_width,
+    };
+
+    handlebars
+        .render("combined_svg_template", &svg_data)
+        .map_err(|e| RustvizError::Parse(format!("render combined svg: {}", e)))
+}
+
+/// Write a single combined SVG to `output_dir/vis_combined.svg` (code + timeline in one file).
 pub fn render_svg_files(
     input_dir: &str,
     output_dir: &str,
@@ -82,12 +144,9 @@ pub fn render_svg_files(
     let source_plain = utils::read_file_to_string(format!("{}source.rs", output_dir))
         .map_err(|e| RustvizError::Io(format!("source.rs: {}", e)))?;
 
-    let (code, tl) = render_svg_strings(&annotated, &source_plain, viz_name, visualization_data)?;
-
-    let code_image_file_path = format!("{}vis_code.svg", output_dir);
-    let timeline_image_file_path = format!("{}vis_timeline.svg", output_dir);
-    utils::create_and_write_to_file(&code, code_image_file_path);
-    utils::create_and_write_to_file(&tl, timeline_image_file_path);
+    let combined = render_combined_svg_string(&annotated, &source_plain, viz_name, visualization_data)?;
+    let combined_path = format!("{}vis_combined.svg", output_dir);
+    utils::create_and_write_to_file(&combined, combined_path);
     Ok(())
 }
 

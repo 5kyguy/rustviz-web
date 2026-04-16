@@ -50,3 +50,21 @@ pub fn render_rustviz_source_wasm(source_rs: &str) -> Result<JsValue, JsValue> {
         Err(e) => Err(JsValue::from_str(&e.to_string())),
     }
 }
+
+/// Same pipeline as [`render_rustviz_source_wasm`] but returns `{ vis_combined }` (single SVG).
+#[wasm_bindgen]
+pub fn render_rustviz_source_combined_wasm(source_rs: &str) -> Result<JsValue, JsValue> {
+    match rustviz_lib::render_rustviz_from_source_combined(source_rs, "playground") {
+        Ok(vis_combined) => {
+            let obj = Object::new();
+            Reflect::set(
+                &obj,
+                &JsValue::from_str("vis_combined"),
+                &JsValue::from_str(&vis_combined),
+            )
+            .map_err(|_| JsValue::from_str("Reflect::set vis_combined failed"))?;
+            Ok(obj.into())
+        }
+        Err(e) => Err(JsValue::from_str(&e.to_string())),
+    }
+}

@@ -2,6 +2,11 @@
 /* eslint-disable */
 
 /**
+ * Same pipeline as [`render_rustviz_source_wasm`] but returns `{ vis_combined }` (single SVG).
+ */
+export function render_rustviz_source_combined_wasm(source_rs: string): any;
+
+/**
  * Run source-only RustViz inference in the browser from one Rust input.
  * Returns a JS object `{ vis_code, vis_timeline }` (SVG strings).
  */
@@ -16,6 +21,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
+    readonly render_rustviz_source_combined_wasm: (a: number, b: number) => [number, number, number];
     readonly render_rustviz_source_wasm: (a: number, b: number) => [number, number, number];
     readonly render_rustviz_wasm: (a: number, b: number, c: number, d: number, e: number, f: number) => [number, number, number];
     readonly __wbindgen_exn_store: (a: number) => void;
